@@ -1,0 +1,46 @@
+<% if @new_book.errors.any? %>
+  <%= @new_book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @new_book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<div class='container px-5 px-sm-0'>
+    <div class='row'>
+    <%= render 'books/link' %>
+
+        <div class='col-md-8 offset-md-1'>
+            <div class="flash">
+              <%= flash[:notice] %>
+            </div>
+            <div>
+                <h2>Book detail</h2>
+                <table>
+                    <td>
+                        <%= link_to user_path(@book.user_id) do %>
+                            <%= image_tag @book.user.get_profile_image(100,100) %>
+                            <%= @book.user.name %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= link_to book_path(@book) do %>
+                            <%= @book.title %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= @book.body %>
+                    </td>
+                    <% if @book.user == current_user %>
+                        <td>
+                            <%= link_to "Edit", edit_book_path(@book) %>
+                        </td>
+                        <td>
+                            <%= link_to "Destroy", book_path(@book), method: :delete %>
+                        </td>
+                    <% end %>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

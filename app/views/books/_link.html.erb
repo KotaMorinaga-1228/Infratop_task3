@@ -1,0 +1,28 @@
+<div class='col-md-3'>
+    <h2>User info</h2>
+      <table class='table'>
+        <tr><%= image_tag @user.get_profile_image(100,100) %><tr>
+        <tr>
+	        <th>name</th>
+	        <th><%= @user.name %></th>
+        </tr>
+        <tr>
+	        <th>introduction</th>
+	        <th><%= @user.introduction %></th>
+        </tr>
+      </table>
+    <%= link_to edit_user_path(@user) do %>
+      <p class="btn btn-info btn-sm btn-block mb-3 setting"><i class="fas fa-user-cog"></i></p>
+    <% end %>
+
+    <h1>New book</h1>
+      <%= form_with model: @new_book, url: '/books', method: :post do |f| %>
+        <h4>Title</h4>
+          <%= f.text_field :title %>
+        <h4>Opinion</h4>
+          <%= f.text_area :body %>
+        <div class="form-group">
+          <%= f.submit 'Create Book' %>
+        </div>
+      <% end %>
+</div>
